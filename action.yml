@@ -2,7 +2,7 @@ name: 'Checkout'
 description: 'Checkout a Git repository at a particular version'
 inputs:
   repository:
-    description: "Repository name without owner, 'verily-src'. For example, actions/checkout"
+    description: "Repository name without owner. For example, 'repository: actions-checkout', not 'repository: owner/actions-checkout'"
   ref:
     description: >
       The branch, tag or SHA to checkout. When checking out the repository that

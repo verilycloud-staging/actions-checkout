@@ -2,7 +2,9 @@
   <a href="https://github.com/actions/checkout"><img alt="GitHub Actions status" src="https://github.com/actions/checkout/workflows/test-local/badge.svg"></a>
 </p>
 
-# Checkout V2
+# Org-only Checkout
+
+This is a customization of [actions/checkout@v2](https://github.com/actions/checkout) which only allows actions from within the same organization to be checked out even submodules. Subsequently, the input, repository: ` no longer requires the `{owner}/{repository}` pattern; only `{repository}` is necessary. Submodules must be recursively checked out with the repository and also must come from within the same organization.
 
 This action checks-out your repository under `$GITHUB_WORKSPACE`, so your workflow can access it.
 
@@ -36,7 +38,8 @@ Refer [here](https://github.com/actions/checkout/blob/v1/README.md) for previous
 ```yaml
 - uses: actions/checkout@v2
   with:
-    # Repository name without owner, 'verily-src'. For example, actions/checkout
+    # Repository name without owner. For example, 'repository: actions-checkout', not
+    # 'repository: owner/actions-checkout'
     repository: ''
 
     # The branch, tag or SHA to checkout. When checking out the repository that
