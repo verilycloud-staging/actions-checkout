@@ -43,7 +43,7 @@ export function getInputs(): IGitSourceSettings {
   // Workflow repository?
   const isWorkflowRepository =
     qualifiedRepository.toUpperCase() ===
-    `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase()
+    `${github.context.repo.repo}`.toUpperCase()
 
   // Source branch, source version
   result.ref = core.getInput('ref')
