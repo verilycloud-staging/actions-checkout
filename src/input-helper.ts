@@ -16,13 +16,9 @@ export function getInputs(): IGitSourceSettings {
   core.debug(`GITHUB_WORKSPACE = '${githubWorkspacePath}'`)
   fsHelper.directoryExistsSync(githubWorkspacePath, true)
 
-  // Qualified repository
-  const qualifiedRepository =
-    core.getInput('repository') ||
-    `${github.context.repo.repo}`
-  core.debug(`qualified repository = '${qualifiedRepository}'`)
   result.repositoryOwner = github.context.repo.owner
-  result.repositoryName = qualifiedRepository
+  result.repositoryName = core.getInput('repository') || `${github.context.repo.repo}`
+
 
   // Repository path
   result.repositoryPath = core.getInput('path') || '.'
