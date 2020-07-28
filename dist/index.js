@@ -14081,12 +14081,8 @@ function getInputs() {
     githubWorkspacePath = path.resolve(githubWorkspacePath);
     core.debug(`GITHUB_WORKSPACE = '${githubWorkspacePath}'`);
     fsHelper.directoryExistsSync(githubWorkspacePath, true);
-    // Qualified repository
-    const qualifiedRepository = core.getInput('repository') ||
-        `${github.context.repo.repo}`;
-    core.debug(`qualified repository = '${qualifiedRepository}'`);
     result.repositoryOwner = github.context.repo.owner;
-    result.repositoryName = qualifiedRepository;
+    result.repositoryName = core.getInput('repository') || `${github.context.repo.repo}`;
     // Repository path
     result.repositoryPath = core.getInput('path') || '.';
     result.repositoryPath = path.resolve(githubWorkspacePath, result.repositoryPath);
@@ -14094,8 +14090,8 @@ function getInputs() {
         throw new Error(`Repository path '${result.repositoryPath}' is not under '${githubWorkspacePath}'`);
     }
     // Workflow repository?
-    const isWorkflowRepository = qualifiedRepository.toUpperCase() ===
-        `${github.context.repo.owner}/${github.context.repo.repo}`.toUpperCase();
+    const isWorkflowRepository = result.repositoryName.toUpperCase() ===
+        `${github.context.repo.repo}`.toUpperCase();
     // Source branch, source version
     result.ref = core.getInput('ref');
     if (!result.ref) {
