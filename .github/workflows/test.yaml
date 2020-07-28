@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      master
+  pull_request:
+    branches:
+      master
+
+jobs:
+  test-defaults:
+    name: Test Defaults (Repo, Ref)
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo Locally
+      uses: verily-src/actions-checkout@master
+      with:
+        ref: ${{ github.ref }}
+        path: actions-checkout
+    - name: Checkout Repo
+      uses: ./actions-checkout
+      with:
+        path: test-checkout
+    - id: defaults
+      working-directory: test-checkout
+      run: |
+        echo "::set-output name=sha::$(git show HEAD --pretty=format:%H --no-patch)"
+        echo "::set-output name=repo::$(git remote get-url origin | grep -oE [a-zA-Z0-9]+/[a-zA-Z0-9]+$)"
+    - name: Check Repo
+      working-directory: test-checkout
+      if: ${{ github.repo != steps.defaults.outputs.repo }}
+      run: failure()
+    - name: Check Ref
+      working-directory: test-checkout
+      if: ${{ github.sha != steps.defaults.outputs.sha }}
+      run: failure()
