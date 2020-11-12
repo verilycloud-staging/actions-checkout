@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout Repo Locally
       uses: verily-src/actions-checkout@master
+      with:
+        path: actions-checkout
     - name: Checkout Repo
       uses: ./actions-checkout
       with:
