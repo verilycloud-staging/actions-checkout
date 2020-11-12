@@ -8,12 +8,15 @@ on:
 
 jobs:
   test-defaults:
-    name: Test Defaults
+    name: Test Defaults (Repo, Ref)
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repo Locally at PR ref
+    - name: Checkout Repo Locally
       uses: verily-src/actions-checkout@master
-    - name: Checkout Repo Using local action
+      with:
+        ref: ${{ github.ref }}
+        path: actions-checkout
+    - name: Checkout Repo
       uses: ./actions-checkout
       with:
         path: test-checkout
