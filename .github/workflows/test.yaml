@@ -1,3 +1,5 @@
+name: 'Functional Test'
+
 on:
   push:
     branches:
