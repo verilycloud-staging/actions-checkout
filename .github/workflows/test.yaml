@@ -13,8 +13,6 @@ jobs:
     steps:
     - name: Checkout Repo Locally
       uses: verily-src/actions-checkout@master
-      with:
-        token: ${{ secrets.GH_READ_TOKEN }}
     - name: Checkout Repo
       uses: ./actions-checkout
       with:

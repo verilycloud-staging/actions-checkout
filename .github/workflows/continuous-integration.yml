@@ -14,9 +14,6 @@ jobs:
     steps:
     - name: Checkout
       uses: verily-src/actions-checkout@master
-      with:
-        token: ${{ secrets.GH_READ_TOKEN }}
-
     # TODO update this with the private setup-node action
     - name: Setup Node.js 12.x
       uses: actions/setup-node@v1
