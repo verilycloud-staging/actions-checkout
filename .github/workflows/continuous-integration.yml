@@ -26,4 +26,4 @@ jobs:
       run: |
         npm run build
         # Fail if "npm run build" generated new changes in dist
-        git update-index --refresh dist/* | grep -v "node_modules/@zeit/ncc/dist/ncc" && git diff-index --quiet HEAD dist
+        git update-index --refresh dist/* | ( grep -E "^dist" || true ) && git diff-index --quiet HEAD ./dist
