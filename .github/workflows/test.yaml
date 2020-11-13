@@ -1,3 +1,5 @@
+name: 'Functional Test'
+
 on:
   push:
     branches:
@@ -14,7 +16,6 @@ jobs:
     - name: Checkout Repo Locally
       uses: verily-src/actions-checkout@master
       with:
-        ref: ${{ github.ref }}
         path: actions-checkout
     - name: Checkout Repo
       uses: ./actions-checkout
